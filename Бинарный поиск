@@ -1,0 +1,60 @@
+package com.company;
+
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+// Бинарный поиск
+public class G {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int number = scanner.nextInt();
+        int number2 = scanner.nextInt();
+
+        int[] mass_N = new int[number];
+        int[] mass_K = new int[number2];
+
+        for (int i = 0; i < mass_N.length; i++){
+            mass_N[i] = random.nextInt(10);
+        }
+        for (int i = 0; i < mass_K.length; i++){
+            mass_K[i] = random.nextInt(100);
+        }
+
+        for (int j = 0; j < mass_N.length;j++){
+            for (int i = 0; i < mass_N.length - 1; i++){
+                if (j+1 > number) {
+                    break;
+                }else if(mass_N[i] > mass_N[i+1]){
+                    int tmp = mass_N[i + 1];
+                    mass_N[i+1] = mass_N[i];
+                    mass_N[i] = tmp;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(mass_N));
+        System.out.println(Arrays.toString(mass_K));
+
+        System.out.println("Массивы до начала бинарного поиска!");
+        for (int i = 0; i < mass_N.length; i++){
+            mass(number2, mass_N[i], mass_K);
+        }
+    }
+    public static void mass(int two, int num, int mass[]){
+        int index1 = 0;
+        int index2 = two;
+
+        int n = (index1 + index2)/2;
+
+        if (num == mass[n]){
+            System.out.println("YES");
+        }else if (num < mass[n]){
+            index2 = n-1;
+            System.out.println("NO");
+        }else if (num > mass[n]){
+            index1 = n+1;
+            System.out.println("NO");
+        }
+
+    }
+}
